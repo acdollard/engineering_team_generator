@@ -147,3 +147,7 @@ function createNewMember() {
 
 // createNewMember(); 
 
+function createCard() {
+    
+}
+
