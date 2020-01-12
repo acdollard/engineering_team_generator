@@ -4,6 +4,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const HTML_temps = require("./templates/html_template")
+const fs = require("fs");
 
 let engineers = [];
 let interns = []; 
@@ -156,9 +157,11 @@ function createNewMember() {
                 cards.push(engineer_cards);
                 cards.push(intern_cards);
                 console.log(cards); 
-                // console.log(manager_cards);
-                return manager_cards;
-            //have arrays at this point, need to generate cards 
+
+                const template = HTML_temps.generateHTML(cards);
+                console.log(template);
+                return template;
+
             default:
             return console.log("defaulted!")
         }
