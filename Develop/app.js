@@ -11,6 +11,7 @@ let interns = [];
 let managers = []; 
 
 
+managerInit(); 
 
 function managerInit() {
     inquirer.prompt ([
@@ -50,7 +51,6 @@ function managerInit() {
     })
 };
 
-managerInit(); 
 // console.log(managers)
 
 function engineerPrompt() {
@@ -129,8 +129,7 @@ function createNewMember() {
             choices: ["Add new engineer", "Add new intern", "Done adding team members"]
         }
     ]).then(data => {
-        // const choice = data.choice
-        // console.log(data.createNewMember);
+//switch statement listening for whether to create new team member, or finish 
         switch(data.createNewMember) {
             case "Add new engineer":
             return engineerPrompt(); 
@@ -140,16 +139,16 @@ function createNewMember() {
 
             case "Done adding team members":
                 const manager_cards = managers.map(manager => {
-                    // console.log("manager", manager);
+                    
                     return HTML_temps.createManagerCard(manager); 
                 });
                 const intern_cards = interns.map(intern => {
-                    // console.log("manager", manager);
+                    
                     return HTML_temps.createInternCard(intern); 
                 });
                 const engineer_cards = engineers.map(engineer => {
-                    // console.log("manager", manager);
-                    return HTML_temps.createManagerCard(engineer); 
+                    
+                    return HTML_temps.createEngineerCard(engineer); 
                 });
 
                 let cards = []; 
@@ -159,7 +158,14 @@ function createNewMember() {
                 console.log(cards); 
 
                 const template = HTML_temps.generateHTML(cards);
-                console.log(template);
+
+                fs.writeFile(`./output/${managers[0].name}_team.html`, template, function(err) {
+                    if(err){
+                        console.log(err)
+                    }
+                    console.log("Team file successfully generated!")
+                });
+
                 return template;
 
             default:
@@ -178,31 +184,7 @@ function createInternCards() {
 
 }
 
-// function createManagerCard(data) {
-//   return `<div class="col-sm-3">
-//             <div class="card m-2 p-2">
-//                 <h3 class="card-header bg-dark text-white text-center">${data.name}</h3>
 
-//                 <div class="card-body bg-light">
-//                   <h5 class="card-title text-center">Manager</h5>
-//                   <p class="card-text">
-//                     ID: ${data.id}
-//                   </p>
-//                   <p class="card-text">
-//                     email: ${data.email} 
-//                   </p>
-//                   <p class="card-text">
-//                     office number: ${data.office_number}
-//                   </p>
-//                 </div>
-//             </div>
-//             </div>`
-
-//     // fs.appendFile function here after each card gets made? 
-// }
-
-//append cards to HTML template literal
-//write HTML file
 
 
 

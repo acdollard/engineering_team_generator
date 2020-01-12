@@ -1,9 +1,9 @@
 const Employee = require("./Employee.js");
 
 class Manager extends Employee{
-    constructor(name, id, email, officeNumber){
+    constructor(name, id, email, office_number){
         super(name, id, email, "Manager")
-        this.officeNumber = officeNumber; 
+        this.office_number = office_number; 
     }
 
         getOfficeNumber() {
