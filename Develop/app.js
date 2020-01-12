@@ -12,7 +12,7 @@ let managers = [];
 
 
 managerInit(); 
-
+//collects information on Manager
 function managerInit() {
     inquirer.prompt ([
         {
@@ -41,6 +41,7 @@ function managerInit() {
             message: "What is your manager's office number?",
         }
     ]).then(data => {
+    //instantiates new Manager object, calls createNewMember function
       let new_manager =  new Manager(data.name, data.id, data.email, data.office_number);
         managers.push(new_manager);
         console.log(managers);
@@ -51,7 +52,6 @@ function managerInit() {
     })
 };
 
-// console.log(managers)
 
 function engineerPrompt() {
     inquirer.prompt ([
@@ -76,9 +76,10 @@ function engineerPrompt() {
             message: "What is your engineer's github?"
         }
     ]).then(data => {
+        //instantiates new Engineer object, pushes it into engineers array, calls createNewMember function
         let new_engineer =  new Engineer(data.name, data.id, data.email, data.github);
           engineers.push(new_engineer);
-        //   console.log(engineers);
+          console.log(engineers);
           createNewMember(); 
   
       }).catch(function(err){
@@ -86,7 +87,7 @@ function engineerPrompt() {
       })
 }
 
-
+//collects information on new intern
 function internPrompt() {
     inquirer.prompt ([
         {
@@ -110,6 +111,7 @@ function internPrompt() {
             message: "What is your intern's school?"
         }
     ]).then(data => {
+        //instantiates new Intern object, pushes it into interns array, calls createNewMember function
         let new_intern =  new Intern(data.name, data.id, data.email, data.school);
           interns.push(new_intern);
           console.log(interns);
@@ -119,7 +121,7 @@ function internPrompt() {
           console.log(err);
       })
 }
-
+//final prompt asking to create new team member, or finish
 function createNewMember() {
     inquirer.prompt ([
         {
@@ -129,7 +131,7 @@ function createNewMember() {
             choices: ["Add new engineer", "Add new intern", "Done adding team members"]
         }
     ]).then(data => {
-//switch statement listening for whether to create new team member, or finish 
+        //switch statement listening for user's response 
         switch(data.createNewMember) {
             case "Add new engineer":
             return engineerPrompt(); 
@@ -138,6 +140,7 @@ function createNewMember() {
             return internPrompt(); 
 
             case "Done adding team members":
+                //passes each array containing employee objects through a map function to generate cards
                 const manager_cards = managers.map(manager => {
                     
                     return HTML_temps.createManagerCard(manager); 
@@ -151,14 +154,16 @@ function createNewMember() {
                     return HTML_temps.createEngineerCard(engineer); 
                 });
 
-                let cards = []; 
+                //pushes all newly generated card arrays into a single all_cards array
+                let all_cards = []; 
                 cards.push(manager_cards);
                 cards.push(engineer_cards);
                 cards.push(intern_cards);
-                console.log(cards); 
 
-                const template = HTML_temps.generateHTML(cards);
+                //passes all_cards array to the html template, saves as const
+                const template = HTML_temps.generateHTML(all_cards);
 
+                //uses HTML template containing cards to write new html file
                 fs.writeFile(`./output/${managers[0].name}_team.html`, template, function(err) {
                     if(err){
                         console.log(err)
@@ -174,15 +179,7 @@ function createNewMember() {
     })
 }
 
- 
-//create cards for each team member
-function createEngineerCards() {
 
-}
-
-function createInternCards() {
-
-}
 
 
 
