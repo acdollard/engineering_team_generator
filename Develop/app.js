@@ -3,6 +3,7 @@ const Employee = require("../Develop/lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const HTML_temps = require("./templates/html_template")
 
 let engineers = [];
 let interns = []; 
@@ -76,7 +77,7 @@ function engineerPrompt() {
     ]).then(data => {
         let new_engineer =  new Engineer(data.name, data.id, data.email, data.github);
           engineers.push(new_engineer);
-          console.log(engineers);
+        //   console.log(engineers);
           createNewMember(); 
   
       }).catch(function(err){
@@ -128,7 +129,7 @@ function createNewMember() {
         }
     ]).then(data => {
         // const choice = data.choice
-        console.log(data.createNewMember);
+        // console.log(data.createNewMember);
         switch(data.createNewMember) {
             case "Add new engineer":
             return engineerPrompt(); 
@@ -137,17 +138,68 @@ function createNewMember() {
             return internPrompt(); 
 
             case "Done adding team members":
-            return generateHTML(); 
+                const manager_cards = managers.map(manager => {
+                    // console.log("manager", manager);
+                    return HTML_temps.createManagerCard(manager); 
+                });
+                const intern_cards = interns.map(intern => {
+                    // console.log("manager", manager);
+                    return HTML_temps.createInternCard(intern); 
+                });
+                const engineer_cards = engineers.map(engineer => {
+                    // console.log("manager", manager);
+                    return HTML_temps.createManagerCard(engineer); 
+                });
 
+                let cards = []; 
+                cards.push(manager_cards);
+                cards.push(engineer_cards);
+                cards.push(intern_cards);
+                console.log(cards); 
+                // console.log(manager_cards);
+                return manager_cards;
+            //have arrays at this point, need to generate cards 
             default:
             return console.log("defaulted!")
         }
     })
 }
 
-// createNewMember(); 
+ 
+//create cards for each team member
+function createEngineerCards() {
 
-function createCard() {
-    
 }
+
+function createInternCards() {
+
+}
+
+// function createManagerCard(data) {
+//   return `<div class="col-sm-3">
+//             <div class="card m-2 p-2">
+//                 <h3 class="card-header bg-dark text-white text-center">${data.name}</h3>
+
+//                 <div class="card-body bg-light">
+//                   <h5 class="card-title text-center">Manager</h5>
+//                   <p class="card-text">
+//                     ID: ${data.id}
+//                   </p>
+//                   <p class="card-text">
+//                     email: ${data.email} 
+//                   </p>
+//                   <p class="card-text">
+//                     office number: ${data.office_number}
+//                   </p>
+//                 </div>
+//             </div>
+//             </div>`
+
+//     // fs.appendFile function here after each card gets made? 
+// }
+
+//append cards to HTML template literal
+//write HTML file
+
+
 
