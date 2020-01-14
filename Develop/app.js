@@ -140,7 +140,7 @@ function createNewMember() {
             return internPrompt(); 
 
             case "Done adding team members":
-                //passes each array containing employee objects through a map function to generate cards
+                //passes each array of employee-objects through a map function to generate cards
                 const manager_cards = managers.map(manager => {
                     
                     return HTML_temps.createManagerCard(manager); 
@@ -156,14 +156,20 @@ function createNewMember() {
 
                 //pushes all newly generated card arrays into a single all_cards array
                 let all_cards = []; 
-                cards.push(manager_cards);
-                cards.push(engineer_cards);
-                cards.push(intern_cards);
 
-                //passes all_cards array to the html template, saves as const
-                const template = HTML_temps.generateHTML(all_cards);
+                let join1 = manager_cards.join("");
+                let join2 =engineer_cards.join("");
+                let join3 =intern_cards.join("");
 
-                //uses HTML template containing cards to write new html file
+                all_cards.push(join1);
+                all_cards.push(join2);
+                all_cards.push(join3);
+
+
+                //passes all_cards array to the html template, saves as const; joins array to remove commas 
+                const template = HTML_temps.generateHTML(all_cards.join(""));
+
+                //uses html template containing cards to write new html file
                 fs.writeFile(`./output/${managers[0].name}_team.html`, template, function(err) {
                     if(err){
                         console.log(err)

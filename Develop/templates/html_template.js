@@ -1,7 +1,7 @@
 function createManagerCard(data) {
     // console.log("cmc", data);
-    return `<div class="col-sm-3">
-              <div class="card m-2 p-2">
+    return `<div class="col-xs-12 col-sm-10 col-md-6 col-lg-3">
+              <div class="card m-2 p-2 shadow">
                   <h3 class="card-header bg-dark text-white text-center">${data.name}</h3>
   
                   <div class="card-body bg-light">
@@ -10,10 +10,10 @@ function createManagerCard(data) {
                       ID: ${data.id}
                     </p>
                     <p class="card-text">
-                      email: ${data.email} 
+                      Email: ${data.email} 
                     </p>
                     <p class="card-text">
-                      office number: ${data.office_number}
+                      Office Number: ${data.office_number}
                     </p>
                   </div>
               </div>
@@ -22,8 +22,8 @@ function createManagerCard(data) {
 
 function createEngineerCard(data) {
     // console.log("cmc", data);
-    return `<div class="col-sm-3">
-              <div class="card m-2 p-2">
+    return `<div class="col-xs-12 col-sm-10 col-md-6 col-lg-3">
+              <div class="card m-2 p-2 shadow">
                   <h3 class="card-header bg-success text-white text-center">${data.name}</h3>
   
                   <div class="card-body bg-light">
@@ -32,10 +32,10 @@ function createEngineerCard(data) {
                       ID: ${data.id}
                     </p>
                     <p class="card-text">
-                      email: ${data.email} 
+                      Email: ${data.email} 
                     </p>
                     <p class="card-text">
-                      github: ${data.github}
+                      Github: ${data.github}
                     </p>
                   </div>
               </div>
@@ -44,8 +44,8 @@ function createEngineerCard(data) {
 
 function createInternCard(data) {
     // console.log("cmc", data);
-    return `<div class="col-sm-3">
-              <div class="card m-2 p-2">
+    return `<div class="col-xs-12 col-sm-10 col-md-6 col-lg-3">
+              <div class="card m-2 p-2 shadow">
                   <h3 class="card-header bg-danger text-white text-center">${data.name}</h3>
   
                   <div class="card-body bg-light">
@@ -54,10 +54,10 @@ function createInternCard(data) {
                       ID: ${data.id}
                     </p>
                     <p class="card-text">
-                      email: ${data.email} 
+                      Email: ${data.email} 
                     </p>
                     <p class="card-text">
-                      school: ${data.school}
+                      School: ${data.school}
                     </p>
                   </div>
               </div>
